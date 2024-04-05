@@ -6,7 +6,7 @@ import ApiError from "../utils/apiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
 
-// get all comments for a video
+
 const getVideoComments = asyncHandler(async (req, res) => {
     const { videoId } = req.params;
     const { page = 1, limit = 10 } = req.query;
@@ -91,7 +91,7 @@ const getVideoComments = asyncHandler(async (req, res) => {
         .json(new ApiResponse(200, comments, "Comments fetched successfully"));
 });
 
-// add a comment to a video
+
 const addComment = asyncHandler(async (req, res) => {
     const { videoId } = req.params;
     const { content } = req.body;
@@ -121,7 +121,7 @@ const addComment = asyncHandler(async (req, res) => {
         .json(new ApiResponse(201, comment, "Comment added successfully"));
 });
 
-// update a comment
+
 const updateComment = asyncHandler(async (req, res) => {
     const { commentId } = req.params;
     const { content } = req.body;
@@ -161,7 +161,6 @@ const updateComment = asyncHandler(async (req, res) => {
         );
 });
 
-// delete a comment
 const deleteComment = asyncHandler(async (req, res) => {
     const { commentId } = req.params;
 
