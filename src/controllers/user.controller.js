@@ -55,19 +55,20 @@ if (req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.len
 }
 
 if(!avatarLocalpath){
-  throw new ApiError(400," user side Avatar file is required ")
+  throw new ApiError(400,"  AvatarLocalfilepath is required ")
 }
 
 const avatar=await uploadoncloudinary(avatarLocalpath)
 const coverImage=await uploadoncloudinary(coverImageLocalpath)
 
-if(!avatar){
+if(!avatar.url){
   throw new ApiError(400," Avatar file is required ")
   
 }
+
 const user= await User.create({
-  fullName,avatar,
-  coverImage:coverImage || "",
+  fullName,avatar:avatar.url,
+  coverImage:coverImage.url || "",
   email,password,
   username:username.toLowerCase()
 })
@@ -274,21 +275,20 @@ const updateUserAvatar=asyncHandler(async(req,res)=>{
         }
        const avatar=await uploadoncloudinary(avatarLocalpath)
 
-       if(!avatar){
+       if(!avatar.url){
         throw new ApiError(500,"Error while uploading ")
        }
         
   const currentUser = await User.findById(req.user?._id);
   const prevAvatarPath = currentUser.avatar;
   if (prevAvatarPath) {
-    console.log("fdsfh",prevAvatarPath)
     await Deletefromcloudinary(prevAvatarPath);
 }
      const user=  await User.findByIdAndUpdate(
         req.user?._id,
         {
           $set:{
-            avatar:avatar
+            avatar:avatar.url
           }
         },
         {
@@ -311,7 +311,7 @@ const updateUserCoverImage=asyncHandler(async(req,res)=>{
 
        const coverImage=await uploadoncloudinary(coverImageLocalpath)
 
-       if(!coverImage){
+       if(!coverImage.url){
         throw new ApiError(500,"Error while uploading ")
        }
 
@@ -421,7 +421,7 @@ const getWatchHistory = asyncHandler(async(req, res) => {
       },
       {
         $lookup:{
-          from:"video",
+          from:"videos",
           localField:"watchHistory",
           foreignField:"_id",
           as:"watchHistory",
