@@ -60,7 +60,7 @@ pipeline.push(
                 {
                     $project: {
                         username: 1,
-                        "avatar.url": 1
+                        "avatar": 1
                     }
                 }
             ]
