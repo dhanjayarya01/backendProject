@@ -184,7 +184,7 @@ const getVideoById =asyncHandler(async(req,res)=>{
             {   //projection of owner of the chennel
                 $project:{
                     username:1,
-                   "avatar.url":1,
+                   "avatar":1,
                     subscribercount:1,
                     isSubscribed:1
 
