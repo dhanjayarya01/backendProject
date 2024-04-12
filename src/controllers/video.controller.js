@@ -3,12 +3,13 @@ import { uploadoncloudinary } from "../utils/Cloudinary.js";
 import { asyncHandler } from "../utils/asynHandler.js";
 import { Video } from "../models/video.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { User } from "../models/user.model.js";
 import mongoose ,{isValidObjectId}from "mongoose";
 import deleteFromCloudinary from "../utils/Deletefromcloudinary.js";
 
 const getAllVideos=asyncHandler(async(req,res)=>{
     
-const { page = 1, limit = 12, query, sortBy, sortType, userId } = req.query;
+const { page = 1, limit = 10, query, sortBy, sortType, userId } = req.query;
 
 const pipeline=[]
 
