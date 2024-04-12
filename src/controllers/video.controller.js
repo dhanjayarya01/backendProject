@@ -136,7 +136,7 @@ const getVideoById =asyncHandler(async(req,res)=>{
         throw new ApiError(400, "Invalid videoId");
     }
 
-   const video= Video.aggregate([
+   const video= await Video.aggregate([
     {
         $match:{
             _id:new mongoose.Types.ObjectId(videoId)
