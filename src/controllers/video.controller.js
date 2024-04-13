@@ -221,7 +221,7 @@ const getVideoById =asyncHandler(async(req,res)=>{
             duration: 1,
             comments: 1,
             owner: 1,
-            likesCount: 1,
+            likecount: 1,
             isLiked: 1
         }
     }
