@@ -35,7 +35,7 @@ coverImage:{
 
 },
 
-watchHestory:[
+watchHistory:[
     {
         type:Schema.Types.ObjectId,
         ref:"Video"
