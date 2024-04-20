@@ -364,7 +364,28 @@ const getUserChannelProfile = asyncHandler(async(req, res) => {
           from:"videos",
           localField:"_id",
           foreignField:"owner",
-          as:"channelvideos"
+          as:"channelvideos",
+
+          pipeline:[
+            {
+              $lookup:{
+                from:"users",
+                localField:"owner",
+                foreignField:"_id",
+                as:"owner",
+
+                pipeline:[
+                  {
+                    $project:{
+                      fullName:1,
+                      avatar:1,
+                      username:1
+                    }
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
 
