@@ -9,7 +9,7 @@ const app= express()
 
 app.use(express.static('dist'))
 app.use(cors({
-    origin: '*',
+    origin: process.env.CORS_ORIGIN,
     credentials:true,
 }))
 
