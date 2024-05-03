@@ -74,7 +74,7 @@ const user= await User.create({
  }
 
    return res.status(201).json(
-    new ApiResponse(200, createduser, "user registered successfully")
+    new ApiResponse(200, createduser, " registered successfully")
    )
 })
 
@@ -130,7 +130,7 @@ return res
         {
             user: loggedInuser, accessToken, refreshToken
         },
-        "User logged In Successfully"
+        " logged In Successfully"
     )
 )
 
@@ -157,13 +157,12 @@ const logoutUser= asyncHandler(async(req,res)=>{
   .status(200)
   .clearCookie("accessToken",options)
   .clearCookie("refreshToken",options)
-  .json(new ApiResponse (200,{},"User Logged Out"))
+  .json(new ApiResponse (200,{}," Logged Out"))
 })
 
 
 const refreshAccessToken = asyncHandler(async(req,res)=>{
-  console.log("hihihih")
-  console.log("hi",req.cookies.refreshToken)
+
   const incomingRefreshToken=req.cookies.refreshToken || req.body.refreshToken
 
   if(!incomingRefreshToken){
